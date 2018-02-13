@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <string.h>
+#include "SPISlave.h"
 
 // WiFi parameters to be configured
 const char* ssid = "Asusnet";
@@ -17,6 +18,7 @@ uint8_t txBuff[150];
 
 void setup(void)
 {
+
 	Serial.begin(115200);
 	// Connect to WiFi
 	Serial.print("Connecting to wifi: Asusnet");
@@ -36,15 +38,30 @@ void setup(void)
 	msg = "Hello PC! Im esp :)";
 	txBuff[0] = 21;
 	txBuff[2] = 55;
+
+	// data has been received from the master. Beware that len is always 32
+	// and the buffer is autofilled with zeroes if data is less than 32 bytes long
+	// It's up to the user to implement protocol for handling data length
+	Serial.println("setup spi begin");
+	SPISlave.onData([](uint8_t * data, size_t len) {
+		(void) len;
+		Serial.printf("Question: %s\n", (char *)data);
+	});
+	SPISlave.begin();
+	Serial.println("setup spi finish");
 }
+
+
 
 void loop() {
 	// Nothing
+	/*
 	udp.beginPacket(host, port);
 	udp.write(msg.c_str(), msg.length());
 //	udp.write(txBuff, 2);
 	udp.endPacket();
-	Serial.println("msg send");
+//	Serial.println("msg send");
+	Serial.println("Its loop");
 	delay(500);
-
+*/
 }

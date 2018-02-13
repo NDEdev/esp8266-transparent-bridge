@@ -23,6 +23,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.20262079" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -32,6 +35,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.777199460" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -41,6 +47,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/ESP8266WiFi/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/esp/libraries/SPISlave/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.1111067586" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
