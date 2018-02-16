@@ -7,18 +7,29 @@
 const char* ssid = "Asusnet";
 const char* password = "AoDjCEyu";
 
-
 WiFiUDP udp;
 
 const char *host = "192.168.1.41";
 uint16_t	port = 5550;
 
-std::string msg = "Hello PC! Im esp:)";
-uint8_t txBuff[150];
+uint8_t txBuff[32];
+int data_ready = 0;
+const int ready_to_receive_pin = 4; //GPIO4 High level when it ready to receive
+
+#define READY_TO_RECEIVE() digitalWrite(ready_to_receive_pin,1)
+#define POCESSING_RECEIVE() digitalWrite(ready_to_receive_pin,0)
+
+void spi_rx_callback(uint8_t *data, size_t len){
+	if(len == 32 && data_ready == 0){
+		POCESSING_RECEIVE();
+		memcpy(txBuff, data, len);
+		data_ready = 1;
+	}
+}
 
 void setup(void)
 {
-
+	pinMode(ready_to_receive_pin, OUTPUT);
 	Serial.begin(115200);
 	// Connect to WiFi
 	Serial.print("Connecting to wifi: Asusnet");
@@ -35,33 +46,25 @@ void setup(void)
 	Serial.println("WiFi connected");
 	// Print the IP address
 	Serial.println(WiFi.localIP());
-	msg = "Hello PC! Im esp :)";
-	txBuff[0] = 21;
-	txBuff[2] = 55;
 
 	// data has been received from the master. Beware that len is always 32
 	// and the buffer is autofilled with zeroes if data is less than 32 bytes long
 	// It's up to the user to implement protocol for handling data length
-	Serial.println("setup spi begin");
-	SPISlave.onData([](uint8_t * data, size_t len) {
-		(void) len;
-		Serial.printf("Question: %s\n", (char *)data);
-	});
+
+	//bind spi rx callback
+	SPISlave.onData(spi_rx_callback);
 	SPISlave.begin();
-	Serial.println("setup spi finish");
+	READY_TO_RECEIVE();
 }
 
 
-
 void loop() {
-	// Nothing
-	/*
-	udp.beginPacket(host, port);
-	udp.write(msg.c_str(), msg.length());
-//	udp.write(txBuff, 2);
-	udp.endPacket();
-//	Serial.println("msg send");
-	Serial.println("Its loop");
-	delay(500);
-*/
+	if(data_ready == 1){
+		udp.beginPacket(host, port);
+		udp.write(txBuff, sizeof(txBuff)-3);
+		udp.endPacket();
+		memset(txBuff, 0, sizeof(txBuff));
+		data_ready = 0;
+		READY_TO_RECEIVE();
+	}
 }
